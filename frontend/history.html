@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Detection History – PlateVision</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="static/css/styles.css" />
+</head>
+<body>
+
+<nav class="navbar">
+  <a href="index.html" class="navbar-brand">🚗 PlateVision <span class="badge">AI</span></a>
+  <div class="navbar-links">
+    <a href="index.html"        class="nav-link">🏠 Home</a>
+    <a href="upload-image.html" class="nav-link">🖼 Image</a>
+    <a href="upload-video.html" class="nav-link">🎬 Video</a>
+    <a href="live-camera.html"  class="nav-link">📷 Live</a>
+    <a href="history.html"      class="nav-link active">📋 History</a>
+  </div>
+</nav>
+
+<div class="container">
+  <h1 class="page-title">📋 Detection History</h1>
+  <p class="page-subtitle">All past detection events stored in the local SQLite database.</p>
+
+  <div id="alert-box" class="hidden"></div>
+
+  <div class="card">
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Type</th>
+            <th>Plate Text</th>
+            <th>Confidence</th>
+            <th>Plates</th>
+            <th>Date</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody id="history-tbody">
+          <tr>
+            <td colspan="7" class="text-muted" style="text-align:center;padding:2rem">
+              <div class="spinner" style="margin:0 auto"></div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<style>
+  .badge-type {
+    display: inline-flex;
+    align-items: center;
+    padding: 2px 8px;
+    border-radius: 99px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    background: rgba(37,99,235,0.15);
+    color: #93c5fd;
+  }
+</style>
+
+<script src="static/js/app.js"></script>
+</body>
+</html>

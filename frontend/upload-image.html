@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Image Detection – PlateVision</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="static/css/styles.css" />
+</head>
+<body>
+
+<nav class="navbar">
+  <a href="index.html" class="navbar-brand">🚗 PlateVision <span class="badge">AI</span></a>
+  <div class="navbar-links">
+    <a href="index.html"        class="nav-link">🏠 Home</a>
+    <a href="upload-image.html" class="nav-link active">🖼 Image</a>
+    <a href="upload-video.html" class="nav-link">🎬 Video</a>
+    <a href="live-camera.html"  class="nav-link">📷 Live</a>
+    <a href="history.html"      class="nav-link">📋 History</a>
+  </div>
+</nav>
+
+<div class="container">
+  <h1 class="page-title">🖼 Image Detection</h1>
+  <p class="page-subtitle">Upload a JPG, PNG, or BMP image to detect and read license plates.</p>
+
+  <div id="alert-box" class="hidden"></div>
+
+  <div class="grid-2">
+    <!-- Upload card -->
+    <div class="card">
+      <p class="card-title">Upload Image</p>
+      <form id="image-form">
+        <div class="upload-zone" id="upload-zone">
+          <input type="file" id="image-input" accept=".jpg,.jpeg,.png,.bmp,.webp" />
+          <div class="upload-icon">🖼</div>
+          <p>Drag & drop or click to select</p>
+          <p class="text-sm text-muted mt-2">JPG · PNG · BMP · WebP · up to 50 MB</p>
+          <p class="file-name" id="file-name"></p>
+        </div>
+        <div style="margin-top:1.2rem">
+          <button type="submit" class="btn btn-primary" id="submit-btn" style="width:100%">
+            ⚡ Detect Plates
+          </button>
+        </div>
+      </form>
+    </div>
+
+    <!-- Original preview -->
+    <div class="card">
+      <p class="card-title">Preview</p>
+      <div class="preview-box" style="min-height:260px">
+        <div class="loading-overlay" id="loading-overlay">
+          <div class="spinner"></div>
+          <p>Running AI detection…</p>
+        </div>
+        <div class="preview-placeholder" id="preview-placeholder">
+          Select an image to preview
+        </div>
+        <img id="result-img" class="hidden" alt="Annotated result" />
+      </div>
+    </div>
+  </div>
+
+  <!-- Results section -->
+  <div id="result-section" class="hidden" style="margin-top:1.5rem">
+    <div class="card mb-4">
+      <p class="card-title">Detection Stats</p>
+      <div class="flex gap-3" id="stats"></div>
+    </div>
+
+    <div class="card">
+      <p class="card-title">Detected Plates</p>
+      <div id="plates-list"></div>
+    </div>
+  </div>
+</div>
+
+<script src="static/js/app.js"></script>
+<script>
+  // Show preview when file selected
+  document.getElementById("image-input").addEventListener("change", function() {
+    const file = this.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = e => {
+      const img = document.getElementById("result-img");
+      const ph  = document.getElementById("preview-placeholder");
+      img.src = e.target.result;
+      img.classList.remove("hidden");
+      if (ph) ph.classList.add("hidden");
+    };
+    reader.readAsDataURL(file);
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Video Detection – PlateVision</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="static/css/styles.css" />
+</head>
+<body>
+
+<nav class="navbar">
+  <a href="index.html" class="navbar-brand">🚗 PlateVision <span class="badge">AI</span></a>
+  <div class="navbar-links">
+    <a href="index.html"        class="nav-link">🏠 Home</a>
+    <a href="upload-image.html" class="nav-link">🖼 Image</a>
+    <a href="upload-video.html" class="nav-link active">🎬 Video</a>
+    <a href="live-camera.html"  class="nav-link">📷 Live</a>
+    <a href="history.html"      class="nav-link">📋 History</a>
+  </div>
+</nav>
+
+<div class="container">
+  <h1 class="page-title">🎬 Video Processing</h1>
+  <p class="page-subtitle">Upload a video file. Every plate in every frame is detected and aggregated.</p>
+
+  <div id="alert-box" class="hidden"></div>
+
+  <div class="grid-2">
+    <!-- Upload -->
+    <div class="card">
+      <p class="card-title">Upload Video</p>
+      <form id="video-form">
+        <div class="upload-zone" id="upload-zone">
+          <input type="file" id="video-input" accept=".mp4,.avi,.mov,.mkv,.webm" />
+          <div class="upload-icon">🎬</div>
+          <p>Drag & drop or click to select</p>
+          <p class="text-sm text-muted mt-2">MP4 · AVI · MOV · MKV · WebM · up to 50 MB</p>
+          <p class="file-name" id="file-name"></p>
+        </div>
+        <div class="alert alert-info mt-2 text-sm">
+          ℹ Processing time depends on video length. Every 3rd frame is analysed for speed.
+        </div>
+        <button type="submit" class="btn btn-primary" id="submit-btn" style="width:100%;margin-top:1rem">
+          ⚡ Process Video
+        </button>
+      </form>
+    </div>
+
+    <!-- Preview / result -->
+    <div class="card">
+      <p class="card-title">Result Video</p>
+      <div class="preview-box" style="min-height:260px">
+        <div class="loading-overlay" id="loading-overlay">
+          <div class="spinner"></div>
+          <p>Processing video… this may take a moment</p>
+        </div>
+        <div class="preview-placeholder">
+          Annotated video will appear here
+        </div>
+        <video id="result-video" class="hidden" controls style="max-width:100%;border-radius:12px"></video>
+      </div>
+    </div>
+  </div>
+
+  <!-- Results -->
+  <div id="result-section" class="hidden" style="margin-top:1.5rem">
+    <div class="card mb-4">
+      <p class="card-title">Processing Stats</p>
+      <div class="flex gap-3 flex-wrap" id="stats"></div>
+    </div>
+
+    <div class="card">
+      <p class="card-title">Unique Plates Detected</p>
+      <div id="plates-list"></div>
+    </div>
+  </div>
+</div>
+
+<script src="static/js/app.js"></script>
+<script>
+  // Show result video when loaded
+  const resultVid = document.getElementById("result-video");
+  const ph = document.querySelector(".preview-placeholder");
+  if (resultVid) {
+    const orig = window.renderVideoResult;
+    // Override to show video element
+    document.getElementById("video-form").addEventListener("submit", () => {
+      if (ph) ph.style.display = "none";
+    });
+  }
+</script>
+</body>
+</html>

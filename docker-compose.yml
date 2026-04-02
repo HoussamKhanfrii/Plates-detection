@@ -1,0 +1,38 @@
+version: "3.9"
+
+services:
+  api:
+    build: .
+    container_name: platevision_api
+    ports:
+      - "8000:8000"
+    volumes:
+      # Persist uploads and the SQLite database between container restarts
+      - ./uploads:/app/uploads
+      - ./models/weights:/app/models/weights
+      - ./plates_history.db:/app/plates_history.db
+    environment:
+      - YOLO_WEIGHTS=/app/models/weights/best.pt
+      - OCR_GPU=false          # set to true if running on a GPU-enabled Docker host
+      - API_PORT=8000
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s        # allow time for model loading
+
+  # Optional: Nginx reverse proxy + frontend serving
+  # Uncomment to run behind nginx (recommended for production)
+  # nginx:
+  #   image: nginx:alpine
+  #   container_name: platevision_nginx
+  #   ports:
+  #     - "80:80"
+  #   volumes:
+  #     - ./frontend:/usr/share/nginx/html:ro
+  #     - ./docs/nginx.conf:/etc/nginx/conf.d/default.conf:ro
+  #   depends_on:
+  #     - api
+  #   restart: unless-stopped

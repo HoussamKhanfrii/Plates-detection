@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PlateVision – License Plate Detection System</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="static/css/styles.css" />
+</head>
+<body>
+
+<nav class="navbar">
+  <a href="index.html" class="navbar-brand">
+    🚗 PlateVision <span class="badge">AI</span>
+  </a>
+  <div class="navbar-links">
+    <a href="index.html"        class="nav-link active">🏠 Home</a>
+    <a href="upload-image.html" class="nav-link">🖼 Image</a>
+    <a href="upload-video.html" class="nav-link">🎬 Video</a>
+    <a href="live-camera.html"  class="nav-link">📷 Live</a>
+    <a href="history.html"      class="nav-link">📋 History</a>
+  </div>
+</nav>
+
+<div class="hero">
+  <h1>Automatic <span>License Plate</span> Detection</h1>
+  <p>Upload an image, a video, or stream from your webcam and let AI detect and read every plate in real time.</p>
+  <div class="flex items-center gap-3" style="justify-content:center">
+    <a href="upload-image.html" class="btn btn-primary">🖼 Try with Image</a>
+    <a href="live-camera.html"  class="btn btn-ghost">📷 Live Camera</a>
+  </div>
+
+  <div class="feature-cards container">
+    <a href="upload-image.html" class="card feature-card" style="text-decoration:none;color:inherit">
+      <div class="feature-icon">🖼</div>
+      <h3>Image Detection</h3>
+      <p>Upload JPG/PNG photos. Get annotated results with bounding boxes and plate text in under a second.</p>
+    </a>
+    <a href="upload-video.html" class="card feature-card" style="text-decoration:none;color:inherit">
+      <div class="feature-icon">🎬</div>
+      <h3>Video Processing</h3>
+      <p>Analyse entire video files. The system scans every frame and aggregates all unique plates found.</p>
+    </a>
+    <a href="live-camera.html" class="card feature-card" style="text-decoration:none;color:inherit">
+      <div class="feature-icon">📡</div>
+      <h3>Live Stream</h3>
+      <p>Real-time detection from your webcam or any RTSP IP camera with annotated MJPEG output.</p>
+    </a>
+  </div>
+</div>
+
+<div class="container" style="padding-top:0">
+  <div class="grid-3">
+    <div class="card" style="text-align:center">
+      <div style="font-size:2rem;margin-bottom:.5rem">⚡</div>
+      <h3 style="margin-bottom:.4rem">Fast</h3>
+      <p class="text-muted text-sm">YOLOv8 inference runs in &lt;50 ms per frame on GPU, ~200 ms on CPU</p>
+    </div>
+    <div class="card" style="text-align:center">
+      <div style="font-size:2rem;margin-bottom:.5rem">🎯</div>
+      <h3 style="margin-bottom:.4rem">Accurate</h3>
+      <p class="text-muted text-sm">EasyOCR with CLAHE preprocessing handles low light, blur, and angle</p>
+    </div>
+    <div class="card" style="text-align:center">
+      <div style="font-size:2rem;margin-bottom:.5rem">🔌</div>
+      <h3 style="margin-bottom:.4rem">API-first</h3>
+      <p class="text-muted text-sm">Full REST API with OpenAPI docs at <code>/docs</code></p>
+    </div>
+  </div>
+</div>
+
+<script src="static/js/app.js"></script>
+</body>
+</html>

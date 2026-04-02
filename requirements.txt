@@ -1,0 +1,19 @@
+# ─── Core inference & API ─────────────────────────────────────────────────────
+fastapi>=0.111.0
+uvicorn[standard]>=0.29.0
+python-multipart>=0.0.9        # required for UploadFile support in FastAPI
+sqlalchemy>=2.0.0
+
+# ─── Computer Vision ──────────────────────────────────────────────────────────
+opencv-python-headless>=4.9.0  # headless: no GUI, suitable for server environments
+ultralytics>=8.2.0             # YOLOv8 (also includes YOLOv9, YOLO11)
+
+# ─── OCR ──────────────────────────────────────────────────────────────────────
+easyocr>=1.7.1
+
+# ─── Utilities ────────────────────────────────────────────────────────────────
+numpy>=1.24.0
+Pillow>=10.0.0
+pyyaml>=6.0
+requests>=2.31.0
+python-dotenv>=1.0.0

@@ -1,0 +1,19 @@
+# Training-specific additional dependencies
+# Install with: pip install -r requirements-training.txt
+
+# Dataset management
+roboflow>=1.1.0
+
+# Training utilities
+torch>=2.2.0                   # install separately with CUDA if GPU training is needed
+torchvision>=0.17.0
+tensorboard>=2.14.0            # optional: training curve visualisation
+matplotlib>=3.7.0
+seaborn>=0.12.0
+
+# Augmentation (used by ultralytics automatically)
+albumentations>=1.3.0
+
+# Notebook support (optional)
+ipykernel
+ipywidgets
