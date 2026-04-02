@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Live Camera – PlateVision</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="static/css/styles.css" />
+</head>
+<body>
+
+<nav class="navbar">
+  <a href="index.html" class="navbar-brand">🚗 PlateVision <span class="badge">AI</span></a>
+  <div class="navbar-links">
+    <a href="index.html"        class="nav-link">🏠 Home</a>
+    <a href="upload-image.html" class="nav-link">🖼 Image</a>
+    <a href="upload-video.html" class="nav-link">🎬 Video</a>
+    <a href="live-camera.html"  class="nav-link active">📷 Live</a>
+    <a href="history.html"      class="nav-link">📋 History</a>
+  </div>
+</nav>
+
+<div class="container">
+  <h1 class="page-title">📷 Live Camera Stream</h1>
+  <p class="page-subtitle">Real-time license plate detection via MJPEG stream. Annotated frames delivered at live speed.</p>
+
+  <div class="grid-2">
+    <!-- Controls -->
+    <div class="card">
+      <p class="card-title">Camera Source</p>
+
+      <div style="margin-bottom:1rem">
+        <label for="camera-source" style="display:block;margin-bottom:.5rem;font-size:.9rem;color:var(--text-muted)">Source type</label>
+        <select id="camera-source" style="width:100%;padding:.6rem .9rem;background:var(--dark);border:1px solid var(--dark-border);border-radius:8px;color:var(--text);font-size:.95rem">
+          <option value="webcam">💻 Webcam (local, index 0)</option>
+          <option value="ip">🌐 IP / RTSP Camera</option>
+        </select>
+      </div>
+
+      <div id="ip-section" class="hidden" style="margin-bottom:1rem">
+        <label for="ip-url" style="display:block;margin-bottom:.5rem;font-size:.9rem;color:var(--text-muted)">Camera URL</label>
+        <input id="ip-url" type="text" placeholder="rtsp://192.168.1.100:554/stream"
+          style="width:100%;padding:.6rem .9rem;background:var(--dark);border:1px solid var(--dark-border);border-radius:8px;color:var(--text);font-size:.9rem" />
+        <p class="text-sm text-muted mt-2">Supports RTSP, HTTP MJPEG, and other OpenCV-compatible URLs.</p>
+      </div>
+
+      <div class="flex gap-2">
+        <button id="start-btn" class="btn btn-success" style="flex:1">▶ Start Stream</button>
+        <button id="stop-btn"  class="btn btn-danger hidden" style="flex:1">■ Stop</button>
+      </div>
+
+      <div style="margin-top:1.5rem">
+        <div id="stream-status" class="stream-status offline">
+          <span class="dot red"></span> OFFLINE
+        </div>
+      </div>
+
+      <div class="card" style="margin-top:1.5rem;background:rgba(37,99,235,0.06)">
+        <p class="card-title">How it works</p>
+        <ul class="text-sm text-muted" style="padding-left:1.2rem;line-height:2">
+          <li>The backend opens the camera via OpenCV</li>
+          <li>Every 5th frame runs YOLOv8 detection + EasyOCR</li>
+          <li>Annotated frames are streamed as MJPEG</li>
+          <li>Close the stream to release the camera</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Stream display -->
+    <div class="card stream-container">
+      <p class="card-title">Live Feed</p>
+      <div class="preview-box" style="min-height:300px;padding:0">
+        <div class="preview-placeholder" id="stream-placeholder" style="padding:3rem">
+          Stream will appear here after pressing Start
+        </div>
+        <img id="stream-img" alt="Live stream" style="display:none;width:100%;border-radius:12px" />
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="static/js/app.js"></script>
+<script>
+  // Toggle IP URL input
+  document.getElementById("camera-source").addEventListener("change", function() {
+    const ipSec = document.getElementById("ip-section");
+    ipSec.classList.toggle("hidden", this.value !== "ip");
+  });
+
+  // Show/hide stream image
+  const streamImg = document.getElementById("stream-img");
+  const placeholder = document.getElementById("stream-placeholder");
+  document.getElementById("start-btn").addEventListener("click", () => {
+    streamImg.style.display = "block";
+    placeholder.style.display = "none";
+  });
+  document.getElementById("stop-btn").addEventListener("click", () => {
+    streamImg.style.display = "none";
+    placeholder.style.display = "flex";
+  });
+</script>
+</body>
+</html>

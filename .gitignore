@@ -1,0 +1,63 @@
+# Python cache
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+*.egg-info/
+dist/
+build/
+*.egg
+
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+
+# Environment variables
+.env
+.env.*
+
+# Runtime uploads (user content)
+uploads/images/*
+uploads/videos/*
+uploads/results/*
+!uploads/images/.gitkeep
+!uploads/videos/.gitkeep
+!uploads/results/.gitkeep
+
+# Database
+*.db
+*.sqlite3
+
+# Model weights (large binary files — store in model registry or manually add)
+models/weights/*.pt
+models/weights/*.onnx
+models/weights/*.engine
+!models/weights/.gitkeep
+
+# Datasets
+datasets/**/*
+!datasets/.gitkeep
+
+# YOLOv8 runs output
+runs/
+
+# Evaluation reports
+evaluation/report.json
+
+# IDE / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+
+# Jupyter notebooks
+.ipynb_checkpoints/
+
+# Coverage
+.coverage
+htmlcov/
