@@ -3,6 +3,7 @@ fastapi>=0.111.0
 uvicorn[standard]>=0.29.0
 python-multipart>=0.0.9        # required for UploadFile support in FastAPI
 sqlalchemy>=2.0.0
+httpx>=0.27.0                  # required by FastAPI's TestClient
 
 # ─── Computer Vision ──────────────────────────────────────────────────────────
 opencv-python-headless>=4.9.0  # headless: no GUI, suitable for server environments
